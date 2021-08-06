@@ -24,13 +24,13 @@ public class WrapMotion : MonoBehaviour
 			}
 
 			// X Position
-			if (gameObject.transform.position.x > 8.5)
+			if (gameObject.transform.position.x > 9.5)
 			{
-				gameObject.transform.position = new Vector2( -8.5f, gameObject.transform.position.y);
+				gameObject.transform.position = new Vector2( -9.25f, gameObject.transform.position.y);
 			}
-			if (gameObject.transform.position.x < -8.5)
+			if (gameObject.transform.position.x < -9.5)
 			{
-				gameObject.transform.position = new Vector2( 8.5f, gameObject.transform.position.y);
+				gameObject.transform.position = new Vector2( 9.25f, gameObject.transform.position.y);
 			}
 		}
 	}

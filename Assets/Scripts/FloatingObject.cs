@@ -3,14 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class PlayerShip : MonoBehaviour
+public class FloatingObject : MonoBehaviour
 {
+
 	[SerializeField]
-	private float thrust;
-	[SerializeField]
-	private float turnRate;
+	private float maxInitialForce;
 	[SerializeField]
 	private float maxVelocity;
+
+	[SerializeField]
+	private float maximuSpin;
+
 
 	[SerializeField]
 	private Rigidbody2D physicsBody;
@@ -18,23 +21,15 @@ public class PlayerShip : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
     {
-        
-    }
+		physicsBody.angularVelocity = Random.Range(-maximuSpin, maximuSpin);
 
+		physicsBody.SetRotation(Random.Range(0, 360));
+		physicsBody.AddRelativeForce(new Vector2(Random.Range(0, maxInitialForce), 0));
+	}
 
 	private void FixedUpdate()
 	{
-		if (physicsBody.velocity.magnitude < maxVelocity)
-		{
-			if (Input.GetKey(KeyCode.W))
-				physicsBody.AddRelativeForce(new Vector2(0, thrust));
-		}
-		if (Input.GetKey(KeyCode.A))
-			physicsBody.AddTorque(turnRate);
-		if (Input.GetKey(KeyCode.D))
-			physicsBody.AddTorque(-turnRate);
-
 		physicsBody.velocity = Vector2.ClampMagnitude(physicsBody.velocity, maxVelocity);
-
+		physicsBody.angularVelocity = Mathf.Clamp( physicsBody.angularVelocity, -maximuSpin, maximuSpin);
 	}
 }
