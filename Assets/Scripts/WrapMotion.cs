@@ -7,31 +7,49 @@ public class WrapMotion : MonoBehaviour
 	[SerializeField]
 	private SpriteRenderer thisRenderer;
 
+	private Camera mainCamera;
 
-    // Update is called once per frame
-    void Update()
+	private bool isWrappingX = false;
+	private bool isWrappingY = false;
+
+
+	private void OnEnable()
+	{
+		mainCamera = Camera.main;
+	}
+
+	private void FixedUpdate()
     {
-        if (!thisRenderer.isVisible)
+		if (thisRenderer.isVisible)
 		{
-			// Y Position
-			if (gameObject.transform.position.y > 5.1)
+			isWrappingX = false;
+			isWrappingY = false;
+		}
+
+        else
+		{
+			Vector2 viewportPosition = mainCamera.WorldToViewportPoint(gameObject.transform.position);
+			Vector2 newWorldPosition = gameObject.transform.position;
+
+			if (!isWrappingX 
+				&&(viewportPosition.x > 1 || viewportPosition.x < 0))
 			{
-				gameObject.transform.position = new Vector2(gameObject.transform.position.x, -5);
-			}
-			if (gameObject.transform.position.y < -5.1)
-			{
-				gameObject.transform.position = new Vector2(gameObject.transform.position.x, 5);
+				Debug.Log("Wrap X");
+
+				newWorldPosition.x = -newWorldPosition.x;
+				isWrappingX = true;
 			}
 
-			// X Position
-			if (gameObject.transform.position.x > 9.5)
+			if (!isWrappingY
+				&& (viewportPosition.y > 1 || viewportPosition.y < 0))
 			{
-				gameObject.transform.position = new Vector2( -9.25f, gameObject.transform.position.y);
+				Debug.Log("Wrap y");
+
+				newWorldPosition.y = -newWorldPosition.y;
+				isWrappingY = true;
 			}
-			if (gameObject.transform.position.x < -9.5)
-			{
-				gameObject.transform.position = new Vector2( 9.25f, gameObject.transform.position.y);
-			}
+
+			gameObject.transform.position = newWorldPosition;
 		}
 	}
 }
