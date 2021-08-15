@@ -18,8 +18,8 @@ public class FloatingObject : MonoBehaviour
 	[SerializeField]
 	private Rigidbody2D physicsBody;
 
-	// Start is called before the first frame update
-	void Start()
+	
+	void OnEnable()
     {
 		physicsBody.angularVelocity = Random.Range(-maximuSpin, maximuSpin);
 

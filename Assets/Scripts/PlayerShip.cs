@@ -29,12 +29,6 @@ public class PlayerShip : MonoBehaviour
 	private bool isTurning = false;
 	private float currentTurn;
 
-	// Start is called before the first frame update
-	void Start()
-    {
-        
-    }
-
 
 	private void FixedUpdate()
 	{

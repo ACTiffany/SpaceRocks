@@ -34,7 +34,7 @@ public class WrapMotion : MonoBehaviour
 			if (!isWrappingX 
 				&&(viewportPosition.x > 1 || viewportPosition.x < 0))
 			{
-				Debug.Log("Wrap X");
+				Debug.Log(gameObject.name + " -> Wrap X");
 
 				newWorldPosition.x = -newWorldPosition.x;
 				isWrappingX = true;
@@ -43,7 +43,7 @@ public class WrapMotion : MonoBehaviour
 			if (!isWrappingY
 				&& (viewportPosition.y > 1 || viewportPosition.y < 0))
 			{
-				Debug.Log("Wrap y");
+				Debug.Log(gameObject.name + " -> Wrap y");
 
 				newWorldPosition.y = -newWorldPosition.y;
 				isWrappingY = true;
